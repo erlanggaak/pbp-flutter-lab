@@ -1,5 +1,6 @@
 ## Stateless widget and Stateful widget.
 Stateless widget adalah widget pada flutter yang tidak pernah berubah sejak app dibuild. Widget ini bersifat immutable. Contohnya adalah Text dan Icon. 
+
 Sedangkan stateful widget adalah widget pada flutter yang dapat berubah ketika. Widget ini bersifat mutable dan dapat berubah terus seiring berjalannya app. Contohnya adalah TextField, RadioButton, Checkbox, dll.
 
 ## Widgets that being used in this project.
@@ -12,15 +13,21 @@ Sedangkan stateful widget adalah widget pada flutter yang dapat berubah ketika. 
 
 ## What is the function of setState()? Explain what variables can be affected by the function.
 function `setState()` adalah function yang dipanggil untuk memberitahu Flutter Framework jika sesuatu telah berubah di dalam state (dalam case app ini, state HomePageState) sehingga meminta app untuk build ulang state tersebut untuk apply perubahan.
+
 fungsi ini bisa merubah keseluruhan attribute/property instance dari state (dalam case ini, state dari HomePage) seperti variable _counter.
 
 ## Explain the difference between const and final.
 Value dari **const** diinitialized ketika compile-time. Jadi, value dari **const** sudah harus ada saat compile-time.
 Sedangkan value dari **final** baru diinitialized ketika run-time sehingga value dari **final** dapat berisi code yang akan mereturn nilai saat run-time.
+
 Contoh ilustrasinya:
+```
 final String date = DateTime.now().toString() // oke
+
 const String date = "01/01/2022" // oke
-// `const String date = DateTime.now().toString()` akan menyebabkan error
+
+const String date = DateTime.now().toString() // akan menyebabkan error
+```
 
 ## Explain how you implement the checklist above.
 1. buat app baru dengan `flutter create counter_7`
