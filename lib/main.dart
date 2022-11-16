@@ -1,6 +1,4 @@
-import 'package:counter_7/budget_list.dart';
 import 'package:flutter/material.dart';
-import 'package:counter_7/budget_form.dart';
 import 'package:counter_7/drawer.dart';
 
 void main() {

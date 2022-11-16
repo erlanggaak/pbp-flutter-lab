@@ -63,7 +63,7 @@ class _BudgetFormState extends State<BudgetForm> {
                     // Validator as form validation
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
-                        return 'Tolong isi Judul!';
+                        return 'Mohon isi judul!';
                       }
                       return null;
                     },
@@ -102,7 +102,7 @@ class _BudgetFormState extends State<BudgetForm> {
                     // Validator as form validation
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
-                        return 'Tolong isi Nominal!';
+                        return 'Mohon isi nominal!';
                       }
                       return null;
                     },
@@ -144,7 +144,7 @@ class _BudgetFormState extends State<BudgetForm> {
                 Padding(
                   // Using padding of 8 pixels
                   padding: const EdgeInsets.all(8.0),
-                  child: DropdownButton<String>(
+                  child: DropdownButtonFormField<String>(
                     value: _type,
                     elevation: 16,
                     hint: const Text("Pilih Jenis"),
@@ -159,6 +159,13 @@ class _BudgetFormState extends State<BudgetForm> {
                         child: Text(value),
                       );
                     }).toList(),
+                    // Validator as form validation
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Mohon isi jenis budget!';
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ],
