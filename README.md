@@ -1,3 +1,5 @@
+# Assignment 7
+
 ## Stateless widget and Stateful widget.
 Stateless widget adalah widget pada flutter yang tidak pernah berubah sejak app dibuild. Widget ini bersifat immutable. Contohnya adalah Text dan Icon. 
 
@@ -36,3 +38,33 @@ const String date = DateTime.now().toString() // akan menyebabkan error
 4. mendefinisikan property floatingactionbutton dari Scaffold yang berisi widget Padding yang didalamnya ada Row yang berisi button increment dan decrement.
 5. membungkus button decrement dengan widget Visibility dan mendefinisikan status visible sesuai value `_counter` (jika `counter` 0. maka visibile = false)
 6. melakukan git add, commit, dan push.
+
+
+# Assignment 8
+
+## Jelaskan perbedaan `Navigator.push` dan `Navigator.pushReplacement`.
+`Navigator.push` akan "menimpa" halaman baru di atas halaman sebelumnya. Layaknya struktur data stack, untuk kembali ke halaman sebelumnya memerlukan `Navigator.pop`.
+Dedangkan `Navigator.pushReplacement` akan menggantikan halaman lama dengan halaman baru. Halaman lama akan otomatis di-pop setelah halaman baru berhasil dirender secara asyncronus
+
+## Sebutkan widget apa saja yang kamu pakai di proyek kali ini dan jelaskan fungsinya.
+- `Drawer`: widget navigasi yang dapat disembunyikan pada samping layar.
+- `ListTile`: widget container yang terdapat property berguna seperti leading dan trailing.
+- `ListView`: widget container scrollable yang berguna untuk menampung banyak baris widget.
+- `TextFormField`: widget form untuk input berupa text.
+- `DropdownButtonFormField`: widget form untuk input berupa pilihan yang dapat di-dropdown.
+- `DateTime`: widget representatif dari sistem penanggalan.
+- `TextEditingController`: widget yang membantu mengontrol text yang terdapat pada TextFormField dan DropdownButtonFormField.
+
+## Sebutkan jenis-jenis event yang ada pada Flutter
+- `onPressed`: event yang akan dipanggil ketika sebuah button diklik
+- `onChanged`: event yang dipanggil ketika terjadi sebuah perubahan pada widget, misalnya perubahan value input pada TextFormField.
+- `onSaved`: event yang dipanggil ketika sebuah form di-save.
+
+## Jelaskan bagaimana cara kerja `Navigator` dalam "mengganti" halaman dari aplikasi Flutter
+`Navigator` mengganti halaman dengan memanfaatkan sebuah `Stack`. Halaman yang ditampilkan di paling atas (dilihat oleh user) adalah halaman yang terdapat pada top of stack. Mengganti halaman dapat memanfaatkan `push` untuk menimpa halaman sebelumnya, `pushReplacement` untuk mengganti halaman sebelumnya, `pop` untuk menghapus halaman yang sedang ditampilkan ke user.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas
+- Membuat widget `Drawer` yang berisi tombol navigasi ke halaman counter_7, form, dan list budget.
+- Membuat file `budget_data.dart` yang berisi listBudget yang akan menyimpan semua budget yang telah diinput user. Dibuat juga class Budget untuk memudahkan penyimpanan data.
+- Menambahkan halaman baru yang berisi form pada sebuah file `budget_form.dart`. Di halaman ini terdapat widget input judul, nominal, jenis, tanggal, dan button untuk menyimpan.
+- Menambahkan halaman baru yang berisi list budget yang sudah ditambahkan pada sebuah file `budget_list.dart`. Pada halaman ini terdapat semua data yang sudah diinput user pada halaman form.
