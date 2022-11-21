@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:counter_7/main.dart';
-import 'package:counter_7/budget_data.dart' as data;
+import 'package:counter_7/page/main.dart';
+import 'package:counter_7/model/budget.dart' as data;
 
 class BudgetList extends StatefulWidget {
   const BudgetList({super.key});
@@ -21,21 +21,28 @@ class _BudgetListState extends State<BudgetList> {
               elevation: 1,
               borderRadius: BorderRadius.circular(5),
               shadowColor: Colors.grey,
-              child: ListTile(
-                title: Text(element.title),
-                subtitle: Text("Rp${element.nominal}"),
-                trailing: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(element.type),
-                    Text("${element.date.year.toString()}-${element.date.month.toString().padLeft(2,'0')}-${element.date.day.toString().padLeft(2,'0')}",
-                    style: const TextStyle(
-                      color: Colors.grey,
-                    )),
-                  ],
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white12,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
+                child: ListTile(
+                  selectedTileColor: Colors.white38,
+                  title: Text(element.title),
+                  subtitle: Text("Rp${element.nominal}"),
+                  trailing: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(element.type),
+                      Text("${element.date.year.toString()}-${element.date.month.toString().padLeft(2,'0')}-${element.date.day.toString().padLeft(2,'0')}",
+                      style: const TextStyle(
+                        color: Colors.grey,
+                      )),
+                    ],
+                  ),
+                ),
+              )
             ),
           )
       );

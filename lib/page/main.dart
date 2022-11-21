@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:counter_7/drawer.dart';
+import 'package:counter_7/page/drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Program Counter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData.dark(),
       home: const MyHomePage(),
     );
   }
