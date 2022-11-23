@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:counter_7/page/main.dart';
 import 'package:counter_7/model/budget.dart' as data;
 
 class BudgetList extends StatefulWidget {

@@ -1,41 +1,20 @@
 import 'package:counter_7/page/mywatchlist_detail.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:counter_7/model/mywatchlist.dart';
-import 'drawer.dart';
+import 'package:counter_7/api/fetch_watch_list.dart';
 
 class MyWatchListPage extends StatefulWidget {
-  const MyWatchListPage({super.key});
+  Future<List<MyWatchList>> watchlist =
+    watchlistCache.isEmpty ? fetchWatchList() : SynchronousFuture(watchlistCache);
+
+  MyWatchListPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _MyWatchListPageState();
 }
 
 class _MyWatchListPageState extends State<MyWatchListPage> {
-  Future<List<MyWatchList>> fetchWatchList() async {
-    var url = Uri.parse('https://tugas2dafi.herokuapp.com/mywatchlist/json/');
-    var response = await http.get(
-      url,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    );
-
-    // melakukan decode response menjadi bentuk json
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-
-    // melakukan konversi data json menjadi object MyWatchList
-    List<MyWatchList> listMyWatchList = [];
-    for (var d in data) {
-      if (d != null) {
-        listMyWatchList.add(MyWatchList.fromJson(d));
-      }
-    }
-
-    return listMyWatchList;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +23,7 @@ class _MyWatchListPageState extends State<MyWatchListPage> {
           title: const Text("My Watch List"),
         ),
         body: FutureBuilder(
-            future: fetchWatchList(),
+            future: widget.watchlist,
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
@@ -68,15 +47,19 @@ class _MyWatchListPageState extends State<MyWatchListPage> {
                         onTap: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => MyWatchListDetail(pk: snapshot.data[index].pk,))
+                              MaterialPageRoute(builder: (context) => MyWatchListDetail(pk: snapshot.data[index].pk - 1,))
                           );
                         },
                         child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(15.0),
                           decoration: BoxDecoration(
                               color: Colors.white38,
                               borderRadius: BorderRadius.circular(10.0),
+                              border: Border.all(
+                                  color: snapshot.data[index].fields.watched ?
+                                    Colors.green : Colors.redAccent
+                              ),
                               // boxShadow: const [
                               //   BoxShadow(
                               //     //color: Colors.white,
@@ -85,9 +68,9 @@ class _MyWatchListPageState extends State<MyWatchListPage> {
                               //   )
                               // ]
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 "${snapshot.data![index].fields.title}",
@@ -96,6 +79,15 @@ class _MyWatchListPageState extends State<MyWatchListPage> {
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
+                              Checkbox(
+                                checkColor: Colors.teal,
+                                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                value: snapshot.data[index].fields.watched,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    snapshot.data[index].fields.watched = value;
+                                  });
+                                })
                             ],
                           ),
                         ),

@@ -1,5 +1,4 @@
 import 'package:counter_7/page/budget_list.dart';
-import 'package:counter_7/page/main.dart';
 import 'package:counter_7/page/budget_form.dart';
 import 'package:counter_7/page/mywatchlist_page.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +50,7 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MyWatchListPage()),
+                MaterialPageRoute(builder: (context) => MyWatchListPage()),
               );
             },
           ),
