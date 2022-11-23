@@ -1,4 +1,4 @@
-import 'package:counter_7/page/mywatchlist_detail.dart';
+import 'package:counter_7/pages/mywatchlist_detail.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:counter_7/model/mywatchlist.dart';

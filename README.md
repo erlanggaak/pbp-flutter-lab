@@ -70,31 +70,39 @@ Dedangkan `Navigator.pushReplacement` akan menggantikan halaman lama dengan hala
 - Menambahkan halaman baru yang berisi list budget yang sudah ditambahkan pada sebuah file `budget_list.dart`. Pada halaman ini terdapat semua data yang sudah diinput user pada halaman form.
 
 
-# Assignment 8
+# Assignment 9
 
-## Jelaskan perbedaan `Navigator.push` dan `Navigator.pushReplacement`.
-`Navigator.push` akan "menimpa" halaman baru di atas halaman sebelumnya. Layaknya struktur data stack, untuk kembali ke halaman sebelumnya memerlukan `Navigator.pop`.
-Dedangkan `Navigator.pushReplacement` akan menggantikan halaman lama dengan halaman baru. Halaman lama akan otomatis di-pop setelah halaman baru berhasil dirender secara asyncronus
+## Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+
+Bisa dengan menggunakan ```manual serialization``` built-in JSON decoder dari ```dart:convert```. Kita bisa gunakan jsonDecode untuk mengubah ```raw JSON``` menjadi ```Map<String, dynamic>```.
+
+Namun, membuat model akan lebih baik karena meminimalisir ```field typo``` sehingga tidak akan error saat runtime serta memudahkan maintaining code jika ada perubahan field pada data.
 
 ## Sebutkan widget apa saja yang kamu pakai di proyek kali ini dan jelaskan fungsinya.
-- `Drawer`: widget navigasi yang dapat disembunyikan pada samping layar.
-- `ListTile`: widget container yang terdapat property berguna seperti leading dan trailing.
-- `ListView`: widget container scrollable yang berguna untuk menampung banyak baris widget.
-- `TextFormField`: widget form untuk input berupa text.
-- `DropdownButtonFormField`: widget form untuk input berupa pilihan yang dapat di-dropdown.
-- `DateTime`: widget representatif dari sistem penanggalan.
-- `TextEditingController`: widget yang membantu mengontrol text yang terdapat pada TextFormField dan DropdownButtonFormField.
 
-## Sebutkan jenis-jenis event yang ada pada Flutter
-- `onPressed`: event yang akan dipanggil ketika sebuah button diklik
-- `onChanged`: event yang dipanggil ketika terjadi sebuah perubahan pada widget, misalnya perubahan value input pada TextFormField.
-- `onSaved`: event yang dipanggil ketika sebuah form di-save.
+- Column : widget yang menampilkan widgets children dalam format kolom vertikal<br>
+- Row : widget yang menampilkan widgets children dalam format baris horizontal<br>
+- Text : widget untuk menampilkan string<br>
+- Drawer : widget untuk menampilkan tautan navigasi<br>
+- Padding : widget untuk memberikan padding<br>
+- Container : widget multifungsi yang bisa digunakan untuk mengatur ukuran serta posisi dari widgets lainnya<br>
+- SizedBox : kotak dengan ukuran tertentu<br>
+- ListView : display children satu per satu
+- Checkbox : input checkbox bernilai true/false<br>
+- FutureBuilder : builder berdasarkan objek Future secara asynchronous
+- 
 
-## Jelaskan bagaimana cara kerja `Navigator` dalam "mengganti" halaman dari aplikasi Flutter
-`Navigator` mengganti halaman dengan memanfaatkan sebuah `Stack`. Halaman yang ditampilkan di paling atas (dilihat oleh user) adalah halaman yang terdapat pada top of stack. Mengganti halaman dapat memanfaatkan `push` untuk menimpa halaman sebelumnya, `pushReplacement` untuk mengganti halaman sebelumnya, `pop` untuk menghapus halaman yang sedang ditampilkan ke user.
+## Jelaskan mekanisme pengambilan data dari json hingga dapat ditampilkan pada Flutter.
+
+1. Lakukan ```flutter pub add http``` pada terminal proyek Flutter untuk menambahkan package http dan potongan kode ```<uses-permission android:name="android.permission.INTERNET" />``` pada ```android/app/src/main/AndroidManifest.xml``` untuk enable permission internet access ke app kita.
+2. Membuat model pada ```model/mywatchlist.dart``` menggunakan ```https://app.quicktype.io/```.
+3. Melakukan pengambilan data menggunakan method ```http.get```.
+4. Mengkonversikan objek yang didapatkan menjadi model yang telah kita buat.
+5. Menampilkan data pada Flutter menggunakan ```FutureBuilder```.
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas
-- Membuat widget `Drawer` yang berisi tombol navigasi ke halaman counter_7, form, dan list budget.
-- Membuat file `budget_data.dart` yang berisi listBudget yang akan menyimpan semua budget yang telah diinput user. Dibuat juga class Budget untuk memudahkan penyimpanan data.
-- Menambahkan halaman baru yang berisi form pada sebuah file `budget_form.dart`. Di halaman ini terdapat widget input judul, nominal, jenis, tanggal, dan button untuk menyimpan.
-- Menambahkan halaman baru yang berisi list budget yang sudah ditambahkan pada sebuah file `budget_list.dart`. Pada halaman ini terdapat semua data yang sudah diinput user pada halaman form.
+- Menambahkan `mywatchlist` ke `Drawer` untuk navigasi ke page tersebut.
+- Membuat model ```MyWatchList``` pada ```model/mywatchlist.dart``` menggunakan ```https://app.quicktype.io/```.
+- Membuat method untuk fetch data dari ```https://tugas2dafi.herokuapp.com/mywatchlist/json/``` pada ```api/fetch_watch_list.dart```.
+- Menampilkan data pada Flutter menggunakan ```FutureBuilder```.
+- Membuat ```pages/mywatchlist_detail.dart``` sebagai halaman detail untuk tiap watchlist.

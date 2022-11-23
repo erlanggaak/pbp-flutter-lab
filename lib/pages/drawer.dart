@@ -1,6 +1,6 @@
-import 'package:counter_7/page/budget_list.dart';
-import 'package:counter_7/page/budget_form.dart';
-import 'package:counter_7/page/mywatchlist_page.dart';
+import 'package:counter_7/pages/budget_list.dart';
+import 'package:counter_7/pages/budget_form.dart';
+import 'package:counter_7/pages/mywatchlist_page.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
